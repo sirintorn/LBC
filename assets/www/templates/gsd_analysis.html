@@ -1,0 +1,195 @@
+<ion-view view-title="GsdAnalysis">
+    <ion-nav-view name="home">
+        <ion-scroll direction="y" style="width: 100%; height: 100%">
+            <div class="row pdd_mrg0 " style="height: 50px;"></div>
+            <div class="row pdd_mrg0  responsive-sm">
+
+                <div class="col col-25">
+                    <label class="item item-input item-select">
+                        <div class="input-label2">
+                            Location
+                        </div>
+
+                        <select ng-model="cdt.factory_data" style="width: 100% font-size:12px;"  ng-change="onChangeFactory()"
+                                ng-options="factory_data.name for factory_data in cdt.factory_obj track by factory_data.id">
+                        </select>
+
+                        <!--<select ng-model="cdt.factory_id" style="width: 100%" ng-change="onChangeFactory()">-->
+                        <!--<option ng-repeat="factory_data in cdt.factory_obj" value='{{factory_data.id}}'>{{factory_data.name}}</option>-->
+                        <!--</select>-->
+                    </label>
+                </div>
+                <div class="col col-25" ng-if="cdt.factory_id">
+                    <label class="item item-input item-select">
+                        <div class="input-label2">
+                            Line
+                        </div>
+
+                        <select ng-model="cdt.line_data" style="width: 100% font-size:12px;" ng-change="onSelectLine()"
+                                ng-options="(lbf_data.code+' '+lbf_data.line_name) for lbf_data in cdt.lbf_obj track by lbf_data.line_id">
+                        </select>
+                        <!--<select ng-model="cdt.line_id" style="width: 100%" ng-change="onSelectLine();">-->
+                        <!--<option ng-repeat="lbf_data in cdt.lbf_obj" value='{{lbf_data.line_id}}'>{{lbf_data.line_name}}</option>-->
+                        <!--</select>-->
+                    </label>
+                </div>
+                <div class="col col-25" ng-click="onClickIconStyle();" ng-if="cdt.line_id">
+                    <label class="item item-input">
+                        <div class="input-label2">
+                            Style
+                        </div>
+                        <!--<div><i class="ion ion-ios-search"></i>&nbsp; {{cdt.style}} {{(cdt.total_sam ? '(' + cdt.total_sam + ')' : '')}}</div>-->
+                        <div class="input-label2"><i class="ion ion-ios-search"></i>&nbsp; {{cdt.style}}</div>
+
+                    </label>
+                </div>
+                <div class="col col-25" ng-if="cdt.style">
+                    <label class="item item-input">
+                        <div class="input-label2">
+                            Customer
+                        </div>
+                        <div  class="input-label2"></i>&nbsp; {{cdt.customer}}</div>
+                    </label>
+                </div>
+
+
+            </div>
+            <div class="row pdd_mrg0  responsive-sm"  ng-if="cdt.ga_detail_obj">
+                <div class="col col-25">
+                    <label class="item item-input">
+                        <div class="input-label2">
+                            C.T. SAM/ตัว
+                        </div>
+                        <input type="number" ng-disabled="true" ng-model="cdt.total_gsd_sam"/>
+                        <!--<div><i class="ion ion-ios-search"></i>&nbsp; {{cdt.customer}}</div>-->
+                    </label>
+                </div>
+                <div class="col col-25" >
+                    <label class="item item-input">
+                        <div class="input-label2">
+                            Total Cycle Time
+                        </div>
+                        <input type="number" ng-disabled="true" ng-model="cdt.total_cycletime"/>
+                        <!--<div><i class="ion ion-ios-search"></i>&nbsp; {{cdt.style}} {{(cdt.total_sam ? '(' + cdt.total_sam + ')' : '')}}</div>-->
+                    </label>
+                </div>
+                <div class="col col-25">
+                    <label class="item item-input">
+                        <div class="input-label2">
+                            % รอบเวลาจริงเทียบ GSD
+                        </div>
+                        <input type="number" ng-disabled="true" ng-model="cdt.sam_header_ratio"/>
+                    </label>
+                </div>
+
+                <!--<div class="col col-25" ng-if="cdt.line_id">-->
+                <div class="col col-25" ng-if="cdt.style" ng-click="onClickRevision();">
+                    <!--<label class="item item-input">-->
+                        <!--<div class="input-label">-->
+                            <!--Revision-->
+                        <!--</div>-->
+                        <!--<input type="number" ng-disabled="true" ng-model="cdt.revision"/>-->
+                    <!--</label>-->
+
+                    <!--<div class="col" ng-if="cdt.style_data" ng-click="onClickRevision();">-->
+                        <label class="item item-input">
+                            <div class="input-label2">
+                                Last update
+                            </div>
+
+                            <div class="input-label2"><i class="ion ion-ios-search"></i>&nbsp; {{cdt.last_update}}</div>
+                        </label>
+                    <!--</div>-->
+                </div>
+
+
+            </div>
+            <div class="row" >
+                <div class="col col-25" ng-if="cdt.style">
+                    <button class="button button-energized" ng-click="onClickBtnTimer(); ">
+                        Timer
+                    </button>
+                </div>
+                <div class="col col-20">
+                    <div   ng-if="is_auto == 't' && cdt.style">
+                        <button class="button button-energized" ng-click="btnAutoData();" >
+                            Auto Hanger
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="height: 20px;"></div>
+            <div class="row" >
+                <table class="table w3-table w3-bordered w3-striped" style="table-layout: fixed">
+                    <tr>
+                        <!--<th style="width: 10vw">gsd detail id-->
+                        <!--</th>-->
+                        <th style="width: 20vw;text-align: center">Process
+                        </th>
+                        <th style="width: 20vw;text-align: center">SAM/ตัว
+                        </th>
+                        <th style="width: 10vw;text-align: center">Cycle Time
+                        </th>
+                        <th style="width: 10vw;text-align: center">Diff
+                        </th>
+                        <th style="width: 10vw;text-align: center">% รอบเวลาจริงเทียบ GSD/ขั้นตอน
+                        </th>
+                        <th style="width: 10vw;text-align: center"> สถานะ
+                        </th>
+                        <th style="width: 10vw;text-align: center"  ng-if="cdt.mode != 'view'">Delete
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="row" ng-scrollbars ng-scrollbars-config="scrollbarConfig" style="width: 100vw; height: 50vh">
+                <!--<ion-scroll direction="y" style="width: 100vw; height: 30vh">-->
+                <!--                    <ion-scroll direction="y" style="width: 300px; height: 100px;">-->
+                <!--{{orderProp}} and {{orderFlagProp}}-->
+                <!---->
+
+                <table class="table w3-table w3-bordered w3-striped" style="table-layout: fixed">
+                    <!--<tr ng-repeat="lbc_data in cdt.lbc_obj| filter:cdt.position_code:strict track by $index " ng-click="onClickRowLbc(lbc_data);">-->
+                    <!--lbc_data['seq']    , 'cycletime'-->
+                    <!--<tr ng-repeat="lbc_data in cdt.lbc_obj| orderBy:(orderProp == 'seq'?lbc_data['seq']:'cycletime'):orderFlagProp" ng-click="onClickRowLbc(lbc_data);">-->
+                    <!--<tr ng-repeat="lbc_data in cdt.lbc_obj| orderBy:['gsd_detail_id', lbc_data['seq']]:[true,true]" ng-click="onClickRowLbc(lbc_data);">-->
+
+                    <tr ng-repeat="ga_detail_data in cdt.ga_detail_obj| filter:{description:cdt.position_code, employee:cdt.emp_code} track by $index" >
+                        <!--<td style="width: 10vw" ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">-->
+                        <!--{{$index + 1}}-->
+                        <!--{{lbc_data.gsd_detail_id}}-->
+                        <!--</td>-->
+                        <td style="width: 20vw" ng-click="onClickRowGaDet(ga_detail_data, $index);" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            {{ga_detail_data.description}}
+                        </td>
+                        <td style="width: 20vw" ng-click="onClickRowGaDet(ga_detail_data, $index);" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            {{ga_detail_data.sam_gsd|number}}
+                        </td>
+                        <td style="width: 10vw" ng-click="onClickRowGaDet(ga_detail_data, $index);" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            {{ga_detail_data.cycletime|number}}
+                        </td>
+                        <td style="width: 10vw" ng-click="onClickRowGaDet(ga_detail_data, $index);" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            {{ga_detail_data.diff|number}}
+                        </td>
+                        <td style="width: 10vw" ng-click="onClickRowGaDet(ga_detail_data, $index);" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            {{ga_detail_data.sam_detail_ratio|number}}
+                        </td>
+                        <td style="width: 10vw" ng-click="onClickRowGaDet(ga_detail_data, $index);" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            {{ga_detail_data.status}}
+                        </td>
+                        <td style="width: 10vw;text-align: center" ng-style="null != ga_detail_data.select_row && ga_detail_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}" ng-if="cdt.mode != 'view'>
+                            <button class="button button-small button-assertive" ng-click="deleteRow(ga_detail_data.id, $index);">
+                                &emsp;<i class="ion ion-android-remove"></i>&emsp;
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <!--</ion-scroll>-->
+            </div>
+
+        </ion-scroll>
+    </ion-nav-view>
+
+</ion-view>
+
+

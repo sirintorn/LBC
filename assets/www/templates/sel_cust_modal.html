@@ -1,0 +1,25 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+    <ion-header-bar class="bar-royal">
+        <h1 class="title">กรุณาเลือกลูกค้า</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeCustModal()">ปิด</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form>
+            <div class="list">
+                <label class="item item-input" style="text-align: right">
+                    <div class="row">
+                        <div class="col col-90">
+                            <input type="text" class="input-label" placeholder="ใส่ชื่อลูกค้าเพื่อค้นหา" ng-change="searchCust()" ng-model="condition_cust.txt_cust">
+                        </div>
+                        <div class="col col-10" ng-if="condition_cust.loading">
+                            <img src="img/loading/Loading1.gif" style="width: 40px;height: 40px;text-align: right">
+                        </div>
+                    </div>
+                </label>
+                <li class="item" ng-repeat="cust_data in condition_cust.cust_data track by cust_data.custid" style="background-color: #fefe65" ng-click="onClickRowCust(cust_data)">{{cust_data.custname}}</li>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

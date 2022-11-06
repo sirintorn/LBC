@@ -1,0 +1,46 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-android-close" ng-click="dialog_group.hide()">
+        </button>
+        <h1 class="title">Search Group Code/Group Name</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row" style="height: 25px;"></div>
+        <div class="row">
+            <!--<div class="col">-->
+                <!--<label class="item item-input">-->
+                    <!--<div class="input-label">-->
+                        <!--Group Code-->
+                    <!--</div>-->
+                    <!--<input type="text" placeholder="Group Code/Group Name" ng-model="cdt_dl_group.group_code">-->
+                <!--</label>-->
+            <!--</div>-->
+            <div class="col">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Group Name
+                    </div>
+                    <input type="text" placeholder="Group Code/Group Name" ng-model="cdt_dl_group.group_name">
+                </label>
+            </div>
+            <!--<div class="col">test {{}}</div>-->
+            <div class="col col-10" ng-if="cdt_dl_group.group_obj.length>0&&((cdt_dl_group.group_obj|filter:{group_name:cdt_dl_group.group_name}).length == 0)">
+                <button class="button button-energized" ng-click="onClickAddGroup();">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table w3-table w3-bordered w3-striped" style="table-layout: fixed">
+                    <tr ng-repeat="group_data in cdt_dl_group.group_obj|filter:{group_name:cdt_dl_group.group_name} track by $index" ng-click="onClickRowGroup(group_data);">
+                        <td>
+                            <!--{{group_data.group_code}}/{{group_data.group_name}}-->
+                            {{group_data.group_name}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

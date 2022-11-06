@@ -1,0 +1,31 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-android-close" ng-click="dialog_gsd_header.hide()">
+        </button>
+        <h1 class="title">Search Customer</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row" style="height: 25px;"></div>
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Customer
+                    </div>
+                    <input type="text" placeholder="Customer" ng-model="cdt_dl_gsd.keyword_cust">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table w3-table w3-bordered w3-striped" style="table-layout: fixed">
+                    <tr ng-repeat="gps_data in cdt_dl_gsd.gsd_header_obj|filter:cdt_dl_gsd.keyword_cust:strict track by $index" ng-click="onClickRowCust(gps_data);">
+                        <td>
+                            {{gps_data.customer}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

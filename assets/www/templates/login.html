@@ -1,0 +1,45 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Cycle Time Tracking v.1.2.10 JUN202020 </h1>
+        <!--
+            v.1.2.11    AUG112022  edit label BN to คอขวด
+        -->
+        <!--        <div class="buttons">
+                    <button class="button button-clear" ng-click="closeLogin()">Close</button>
+                </div>-->
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="doLogin()">
+            <div class="list">
+                <div style="text-align: center">
+                    <img src="img/icon.png" style="width: 30vw;text-align:center"/>
+                </div>
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" ng-model="cdt.username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" ng-model="cdt.password">
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Location
+                    </div>
+
+
+                    <!--<select ng-model="cdt.factory_id" style="width: 100%" ng-change="onChangeFactory()">-->
+                        <!--<option ng-repeat="factory_data in cdt.factory_obj" value='{{factory_data.id}}'>{{factory_data.name}}</option>-->
+                    <!--</select>-->
+                    <select ng-model="cdt.factory_data" style="width: 100%"
+                            ng-options="factory_data.name for factory_data in cdt.factory_obj track by factory_data.id">
+                    </select>
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Log in</button>
+                </label>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-modal-view>

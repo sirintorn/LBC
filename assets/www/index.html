@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+        <title id="title"></title>
+        <!--icon font awesome-->
+        <link href="script_api/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+        <link href="css/style.css" rel="stylesheet">
+
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+        <link href="css/w3.css" rel="stylesheet" type="text/css"/>
+        <style>
+        body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
+                    .fileContainer [type=file] {
+              opacity: 0 !important;
+              position: absolute !important;
+              left: 0 !important;
+              right: 0 !important;
+              top: 0 !important;
+              bottom: 0 !important;
+              width: 100% !important;
+            }
+            body {
+                cursor: url('http://ionicframework.com/img/finger.png'), auto;
+            }
+
+
+            /*            @media (min-width: 680px){
+                            div.modal{
+                                top:0px !important;
+                                bottom: 0 !important;
+                                left: 0 !important;
+                                right: 0 !important;
+                                width: 100% !important;
+                            }
+                        }*/
+
+            /*            div.modal{
+                            top: 0px !important;
+                        }*/
+
+            .preview {
+                width: 300px;
+                height: auto;
+            }
+
+            .text {
+                vertical-align: top;
+            }
+            .larg_icon {
+                font-size: 27px;
+            }
+            /*.my-custom-popup{*/
+            /*            .popup{
+                            background-color: #333333;
+                        }
+            */
+            .popup-head{
+                background-color: #0c63ee;
+            }/*
+            */
+            .popup-title{
+                color: white;
+            }
+            /*loading*/
+            #overlay_1 {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                background: #000;
+                opacity: 0.8;
+                filter: alpha(opacity=80);
+            }
+            #loading_1 {
+                width: 50px;
+                height: 57px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -28px 0 0 -25px;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            /*            tr{
+                            border-color: #000;
+                            border-radius: 25px 25px 25px 25px;
+                        }*/
+            th{
+                background-color: #4CAF50;
+                color: white;
+                height: 39px;
+                border: 1px solid black;
+            }
+            td {
+                border: 1px solid black;
+            }
+            .pdd_mrg0{
+                padding: 0px;
+                margin: 0px;
+            }
+            .al_r{
+                text-align: right;
+            }
+            .al_l{
+                text-align: left;
+            }
+            .row_hl{
+                background-color: #ffff99
+            }
+            .row_tb{
+                background-color: #f8f7f7
+            }
+
+        </style>
+
+        <script src="script_api/md5/md5.min.js" type="text/javascript"></script>
+        <script src="jquery/jquery-core.js" type="text/javascript"></script>
+        <script src="jquery/jquery-sm.js" type="text/javascript"></script>
+        <script src="script/index.js" type="text/javascript"></script>
+
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+        <script src="script/ionic-image-lazy-load.js" type="text/javascript"></script>
+        <script src="js/ng-cordova.min.js"></script>
+        <script src="script_api/flow_upload2.7.1/ng-flow-standalone.min.js" type="text/javascript"></script>
+        <script src="script_api/flow_upload2.7.1/ng-flow.min.js" type="text/javascript"></script>
+
+        <script src="script_api/chart/Chart.js" type="text/javascript"></script>
+        <!--<script src="http://www.chartjs.org/assets/Chart.min.js" type="text/javascript"></script>-->
+
+        <script src="script_api/chart/angular-chart.min.js" type="text/javascript"></script>
+        <script src="script_api/alasql/alasql.min.js" type="text/javascript"></script>
+
+        <!--        <link href="script_api/ng-scrollbars/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css"/>
+                <script src="script_api/ng-scrollbars/jquery.min.js" type="text/javascript"></script>
+                <script src="script_api/ng-scrollbars/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+                <script src="script_api/ng-scrollbars/scrollbars.min.js" type="text/javascript"></script>-->
+
+        <!--        <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css"/>
+                <script src="bower_components/jquery/dist/jquery.min.js"></script>
+                <script src="bower_components/angular/angular.min.js"></script>
+                <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+                <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>-->
+
+
+
+        <link rel='stylesheet prefetch' href='script_api/scrollbar/jquery.mCustomScrollbar.css'>
+        <script src='script_api/scrollbar/jquery.mCustomScrollbar.concat.min.js'></script>
+        <!--        <script src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.0/jquery.mCustomScrollbar.concat.min.js'></script>
+                <script src='https://rawgit.com/iominh/ng-scrollbars/master/src/scrollbars.js'></script>-->
+        <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
+        <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>-->
+
+        <script src='script_api/scrollbar/scrollbars.js'></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/controllers.js"></script>
+    </head>
+
+    <body ng-app="starter">
+    <ion-nav-view></ion-nav-view>
+</body>
+
+</html>
+

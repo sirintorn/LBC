@@ -1,0 +1,74 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+<!--<ion-modal-view>-->
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Add Seq</h1>
+        <!--<div class="buttons">-->
+        <!--<i class="ion ion-ios-close-outline">-->
+        <button class="button button-icon button-clear ion-android-close" ng-click="closeSeqDialog();">
+        </button>
+        <!--<button class="button button-clear" ng-click="dialog_add_seq.hide()"></button>-->
+        <!--</div>-->
+    </ion-header-bar>
+    <ion-content>
+        <div class="row" style="height: 50px;"></div>
+        <div class="row">
+            <div class="col"  ng-click="onClickGcode();">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Group Code
+                    </div>
+                    <!--<div><i class="ion ion-ios-search"></i>&nbsp; {{cdt_dl_as.group_code}}</div>-->
+                    <div><i class="ion ion-ios-search"></i>&nbsp;{{cdt_dl_as.gcode}}</div>
+                </label>
+            </div>
+            <div class="col" ng-click="onClickGroup();">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Group Name
+                    </div>
+                    <div><i class="ion ion-ios-search"></i>&nbsp;{{cdt_dl_as.group_name}}</div>
+                                                <!--<select ng-model="cdt.style_data" style="width: 100%" ng-change="onChangeStyle();">-->
+                                                    <!--<option ng-repeat="style_data in cdt.style_obj" value='{"id":"{{style_data.id}}","style":"{{style_data.style}}","total_sam":"{{style_data.total_sam}}"}'>{{style_data.style}}({{style_data.total_sam|number:3}})</option>-->
+                                                <!--</select>-->
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <!--<div class="col"></div>-->
+            <div class="col">
+                <label class="item item-input">
+                    <div class="input-label">
+                        จำนวนพนักงาน
+                    </div>
+                    <input type="number" placeholder="Employee Qty" ng-model="cdt_dl_as.emp_qty" maxlength="2" type="number">
+                </label>
+            </div>
+            <!--<div class="col"></div>-->
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <div class="input-label">
+                        แทรกหลังลำดับที่
+                    </div>
+                    <input type="number" ng-change="onChangeAfSq();" placeholder="After Seq" ng-model="cdt_dl_as.after_seq">
+                </label>
+            </div>
+            <!--<div class="col"></div>-->
+        </div>
+        <div class="row ">
+            <div class="col"></div>
+            <div class="col al_r">
+                <button class="button button-balanced" ng-click="onClickOkAs();">
+                    &nbsp;&nbsp;OK&nbsp;&nbsp;
+                </button>
+            </div>
+            <div class="col al_l">
+                <button class="button button-assertive" ng-click="dialog_add_seq.hide()">
+                    Cancel
+                </button>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,122 @@
+<ion-view view-title="Kaizen">
+  <!--    <div class="bar bar-header bar-positive">
+          <h1 class="title">Line Balancing</h1>
+      </div>-->
+  <ion-nav-view name="home">
+    <ion-scroll direction="xy" style="width: 100%; height: 100%">
+      <div class="row pdd_mrg0 " style="height: 50px;"></div>
+      <div class="row pdd_mrg0  responsive-sm">
+        <div class="col col-25" ng-click="onClickIconCust();">
+          <label class="item item-input">
+            <div class="input-label">
+              Customer
+            </div>
+            <div><i class="ion ion-ios-search"></i>&nbsp; {{cdt.customer}}</div>
+          </label>
+        </div>
+        <div class="col col-25" ng-click="onClickIconStyle();" ng-if="cdt.customer">
+          <label class="item item-input">
+            <div class="input-label">
+              Style
+            </div>
+            <div><i class="ion ion-ios-search"></i>&nbsp; {{cdt.style}} {{(cdt.total_sam ? '(' + cdt.total_sam + ')' : '')}}</div>
+          </label>
+        </div>
+        <div class="col col-25" ng-if="cdt.style">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Location
+            </div>
+            <select ng-model="cdt.factory_id" style="width: 100%" ng-change="onChangeFactory()">
+              <option ng-repeat="factory_data in cdt.factory_obj" value='{{factory_data.id}}'>{{factory_data.name}}</option>
+            </select>
+          </label>
+        </div>
+        <div class="col col-25" ng-if="cdt.style && cdt.factory_id">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Line
+            </div>
+            <select ng-model="cdt.line_id" style="width: 100%" ng-change="onSelectLine();">
+              <option ng-repeat="lbf_data in cdt.lbf_obj" value='{{lbf_data.line_id}}'>{{lbf_data.line_name}}</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="row pdd_mrg0 responsive-sm" ng-if="cdt.style && cdt.factory_id && cdt.line_id">
+        <div class="col col-90"></div>
+        <div class="col">
+          <button class="button button-energized" ng-click="addKaizen();">
+            Save
+          </button>
+        </div>
+        <!--                <div class="col">
+                            <button class="button button-energized" ng-click="btnOrderCtMaxMin();">
+                                Next
+                            </button>
+                        </div>-->
+      </div>
+      <!--ng-if="cdt.line_id"-->
+      <div class="row pdd_mrg0 responsive-sm" ng-if="cdt.line_id">
+        <div class="col col-25">
+          <label class="item item-input">
+            <span class="input-label">Seq&nbsp;<i class="ion-android-arrow-forward"></i></span>
+            <input type="text" placeholder="Seq" ng-model="cdt.seq_max">
+          </label>
+        </div>
+        <div class="col col-65">
+          <label class="item item-input">
+                        <span class="input-label">Process Name&nbsp;
+                            <i class="ion-android-star"></i>
+                        </span>
+            <input type="text" placeholder="Process Name" ng-model="cdt.process_name">
+            <!--                        <input type="text" placeholder="Position" ng-model="search.$">-->
+          </label>
+        </div>
+        <!--                                <div class="col col-10">
+                                            <button class="button button-energized">
+                                                ...
+                                            </button>
+                                        </div>-->
+      </div>
+      <div class="row  responsive-sm" ng-if="cdt.style && cdt.factory_id && cdt.line_id">
+        <div class="col col-50">
+
+          <button class="button button-positive" flow-btn ng-click="onClickTakePicBf()">
+           <i class="ion-ios-camera"></i> Before
+          </button><br>
+          <img src="img/loading/loading_bar.gif" ng-if="cdt.loading_bf" style="height: 50px;"/>
+          <img ng-if="cdt.src_imgbefore&&!cdt.loading_bf" style="width:90%" ng-src="{{'data:image/png;base64,'+cdt.src_imgbefore }}"/>
+          <img src="img/employee/user_file4.png" ng-show="!cdt.src_imgbefore.length&&!cdt.loading_bf" style="width: 20vw;"/>
+        </div>
+        <div class="col col-50">
+          <button class="button button-positive" flow-btn ng-click="onClickTakePicAf()">
+            <i class="ion-ios-camera"></i> After
+          </button><br>
+          <img src="img/loading/loading_bar.gif" ng-if="cdt.loading_af" style="height: 50px;"/>
+          <img ng-if="cdt.src_imgafter&&!cdt.loading_af" style="width:90%" ng-src="{{'data:image/png;base64,'+cdt.src_imgafter }}"/>
+          <img src="img/employee/user_file4.png" ng-show="!cdt.src_imgafter.length" style="width: 20vw;"/>
+        </div>
+      </div>
+      <div class="row  responsive-sm" ng-if="cdt.style && cdt.factory_id && cdt.line_id">
+        <div class="col col-50">
+          Before Details<br>
+          <textarea style="border: solid 1px;width: 40vw;height: 10vw" ng-model="cdt.before_detail"></textarea>
+        </div>
+        <div class="col col-50">
+          After Details<br>
+          <textarea style="border: solid 1px;width: 40vw;height: 10vw" ng-model="cdt.after_detail"></textarea>
+        </div>
+      </div>
+      <div class="row  responsive-sm" ng-if="cdt.style && cdt.factory_id && cdt.line_id">
+        <div class="col">
+          Corrective Action<br>
+          <textarea style="border: solid 1px;width: 90vw;height: 10vw" ng-model="cdt.corrective_action"></textarea>
+        </div>
+      </div>
+    </ion-scroll>
+  </ion-nav-view>
+
+</ion-view>
+
+

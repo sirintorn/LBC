@@ -1,0 +1,109 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;"
+                xmlns="http://www.w3.org/1999/html">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Sewing Standardized Work Sheet</h1>
+        <!--<div class="buttons">-->
+        <!--<i class="ion ion-ios-close-outline">-->
+        <button class="button button-icon button-clear ion-android-close" ng-click="onClosePrintStd();">
+        </button>
+        <!--<button class="button button-clear" ng-click="dialog_add_seq.hide()"></button>-->
+        <!--</div>-->
+    </ion-header-bar>
+    <ion-content>
+        <!--<div class="row" style="height: 100px"></div>-->
+
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> วันที่จับเวลา &nbsp;</span>
+                    <input type="text" placeholder="lastupdate" ng-model="cdt_std.lastupdate" ng-disabled="true">
+                </label>
+            </div>
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> Line &nbsp;</span>
+                    <input type="text" placeholder="line" ng-model="cdt_std.line" ng-disabled="true">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> Style &nbsp;</span>
+                    <input type="text" placeholder="style" ng-model="cdt_std.style" ng-disabled="true">
+                </label>
+            </div>
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> กลุ่มงาน &nbsp;</span>
+                    <input type="text" placeholder="description" ng-model="cdt_std.description" ng-disabled="true">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> รหัสพนักงาน &nbsp;</span>
+                    <input type="text" placeholder="employee" ng-model="cdt_std.employee" ng-disabled="true">
+                </label>
+            </div>
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> ชื่อพนักงาน &nbsp;</span>
+                    <input type="text" placeholder="ชื่อพนักงาน" ng-model="cdt_std.employee_name" ng-disabled="false">
+                </label>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> WIP &nbsp;</span>
+                    <input type="text" placeholder="wip" ng-model="cdt_std.wip" ng-disabled="false">
+                </label>
+            </div>
+
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> Lot &nbsp;</span>
+                    <input type="text" placeholder="lot" ng-model="cdt_std.lott" ng-disabled="false">
+                </label>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-100" >
+                <label class="item item-input">
+                    <span class="input-label"> ขั้นตอนการเย็บ &nbsp;</span>
+                    <input type="text" placeholder="step" ng-model="cdt_std.step" ng-disabled="false">
+                </label>
+
+            </div>
+            <div class="col">
+
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> Takt Time &nbsp;</span>
+                    <input type="text" placeholder="takttime" ng-model="cdt_std.takttime_plan" ng-disabled="true">
+                </label>
+            </div>
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label"> Cycle Time &nbsp;</span>
+                    <input type="text" placeholder="cycletime" ng-model="cdt_std.cycletime" ng-disabled="true">
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" align="center">
+                <button class="button button-balanced" ng-click="print();">
+                    Print
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

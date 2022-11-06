@@ -1,0 +1,33 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+    <!--<ion-modal-view>-->
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Please Enter Employee Code</h1>
+        <!--<div class="buttons">-->
+        <!--<i class="ion ion-ios-close-outline">-->
+        <button class="button button-icon button-clear ion-android-close" ng-click="dialog_add_empcode.hide()">
+        </button>
+        <!--<button class="button button-clear" ng-click="dialog_add_empcode.hide()"></button>-->
+        <!--</div>-->
+    </ion-header-bar>
+    <ion-content>
+        <div class="row" style="height: 50px;"></div>
+        <div class="row">
+            <div class="col col-10"></div>
+            <div class="col col-70">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Employee Code
+                    </div>
+                    <input type="text" placeholder="Employee Qty" ng-model="cdt_dl_empcode.emp_code">
+                </label>
+            </div>
+            <div class="col col-10">
+                <button class="button button-balanced" ng-click="onClickOkEmpCode();">
+                    &nbsp;&nbsp;OK&nbsp;&nbsp;
+                </button>
+            </div>
+            <div class="col col-10"></div>
+            <!--<div class="col"></div>-->
+        </div>
+    </ion-content>
+</ion-modal-view>

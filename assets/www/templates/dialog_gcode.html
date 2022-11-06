@@ -1,0 +1,45 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-android-close" ng-click="dialog_gcode.hide()">
+        </button>
+        <h1 class="title">Search Group Code/Group Name</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row" style="height: 25px;"></div>
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Group Code
+                    </div>
+                    <input type="text" placeholder="Group Code" ng-model="cdt_dl_gcode.group_code">
+                </label>
+            </div>
+            <!--<div class="col">-->
+                <!--<label class="item item-input">-->
+                    <!--<div class="input-label">-->
+                        <!--Group Name-->
+                    <!--</div>-->
+                    <!--<input type="text" placeholder="Group Code/Group Name" ng-model="cdt_dl_gcode.group_name">-->
+                <!--</label>-->
+            <!--</div>-->
+            <!--<div class="col">test {{}}</div>-->
+            <div class="col col-10" ng-if="cdt_dl_gcode.gcode_obj.length>0&&((cdt_dl_gcode.gcode_obj|filter:{code:cdt_dl_gcode.group_code}).length == 0)">
+                <button class="button button-energized" ng-click="onClickAddGcode();">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table w3-table w3-bordered w3-striped" style="table-layout: fixed">
+                    <tr ng-repeat="gcode_data in cdt_dl_gcode.gcode_obj|filter:{code:cdt_dl_gcode.group_code} track by $index" ng-click="onClickRowGcode(gcode_data);">
+                        <td>
+                            {{gcode_data.code}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

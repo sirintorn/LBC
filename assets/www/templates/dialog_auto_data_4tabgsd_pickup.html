@@ -1,0 +1,50 @@
+<ion-modal-view style="width: 100%; height: 100%; top: 0%; left: 0%; right: 0%; bottom: 0%;">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">GSD Pick Auto Data</h1>
+        <button class="button button-icon button-clear ion-android-close" ng-click="dialog_auto_data_4tabgsd_pickup.hide()">
+        </button>
+    </ion-header-bar>
+
+
+    <ion-content>
+        <!--<div class="row pdd_mrg0  responsive-sm">
+            <div class="col col-50">
+                <label class="item item-input" id="page-input10">
+                    <span class="input-label">Line</span>
+                    <input type="text" placeholder="">
+                </label>
+            </div>
+            <div class="col col-50">
+                <label class="item item-input" id="page-input11">
+                    <span class="input-label">Style</span>
+                    <input type="text" placeholder="">
+                </label>
+            </div>
+        </div>
+        -->
+        <div class="row pdd_mrg0  responsive-sm">
+            <div class="col col-50">
+                <label class="item item-input" id="page-input6">
+                    <span class="input-label">Start Datetime</span>
+                    <input type="datetime-local" placeholder="" ng-model="cdt.start_date">
+                </label>
+            </div>
+            <div class="col col-50">
+                <label class="item item-input" id="page-input8">
+                    <span class="input-label">Finish Datetime</span>
+                    <input type="datetime-local" placeholder="" ng-model="cdt.finish_date">
+                </label>
+            </div>
+
+        </div>
+            <div class="col">
+                <button id="page-button2" class="button button-positive button-block icon ion-search" ng-click="onClickSearch()";> Search</button>
+            </div>
+        <div class="col" style="text-align: center" >
+            <h1> Total Station</h1>
+            <span style='font-size:200px;'>{{cdt.max_station_id}}</span>
+        </div>
+        </div>
+
+    </ion-content>
+</ion-modal-view>

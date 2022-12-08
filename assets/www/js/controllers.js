@@ -121,6 +121,9 @@
             var finishDateTime = "";
             var max_rev = 0;
 
+            var isUnderTakt = false;
+            var tableColor = "9999ff";
+
             clearGraph();
 
             function init() {
@@ -273,6 +276,7 @@
                 $scope.data = [];
                 $scope.series = [];
             }
+
             $scope.onClickFinish = function () {
 //                if (validateFormLbMain()) {
                     var imgCanvas = document.getElementById('bar');
@@ -314,7 +318,8 @@
                     id: $scope.cdt.id,
                     income:$scope.cdt.income,
                     eff_plan:$scope.cdt.eff_plan,
-                    attatch_chart: $scope.cdt.attatch_chart};
+                    attatch_chart: $scope.cdt.attatch_chart,
+                    eff_chance: $scope.cdt.eff_chance};
                 updateLbMainData(request, function (data) {
                     console.log("updateLbMainData", data);
                     if (null != data.updateLbMain && data.updateLbMain && null != data.updatePicLbMain && data.updatePicLbMain) {
@@ -544,6 +549,7 @@
 					, takttime_plan: $scope.cdt.takttime_plan
 					, income: $scope.cdt.income
 					, eff_plan: $scope.cdt.eff_plan
+					, eff_chance: $scope.cdt.eff_chance
 				};
 				updateLbMainByCdtTaktTime(request, function (data) {
 					console.log("updateLbMainByCdtTaktTime", data);
@@ -1384,6 +1390,13 @@
                         $scope.cdt.p_green = lb_main_data.p_green;
                         $scope.cdt.p_yellow = lb_main_data.p_yellow;
                         $scope.cdt.p_orange = lb_main_data.p_orange;
+
+                        //Remark NOV232022 By P.Sirintorn
+                        if(lb_main_data.eff_chance == 0){
+                            $scope.cdt.eff_chance = "  N/A"
+                        }else{
+                            $scope.cdt.eff_chance = parseFloat((lb_main_data.eff_chance - 0).toFixed(3));
+                        }
                         //====================================================================
 
                         showLoading($ionicLoading);
@@ -1418,6 +1431,7 @@
                         $scope.cdt.p_green = 0;
                         $scope.cdt.p_yellow = 0;
                         $scope.cdt.p_orange = 0;
+                        $scope.cdt.eff_chance = 0;
                         clearGraph();
                         $scope.getCrdateFrLbMainByMax();
                     }
@@ -1532,6 +1546,13 @@
                 $scope.cdt.p_green = lb_main_data.p_green;
                 $scope.cdt.p_yellow = lb_main_data.p_yellow;
                 $scope.cdt.p_orange = lb_main_data.p_orange;
+
+                //Remark NOV232022 By P.Sirintorn
+                if(lb_main_data.eff_chance == 0){
+                    $scope.cdt.eff_chance = "  N/A"
+                }else{
+                    $scope.cdt.eff_chance = lb_main_data.eff_chance;
+                }
                 //====================================================================
 
                 showLoading($ionicLoading);
@@ -1712,6 +1733,43 @@
                         //                            $scope.$apply();
                         //                        }
                         //                        $scope.updateChartValue(data.data);
+//  Check data size
+//                        $ionicPopup.alert({
+//                            title: 'data alert !',
+//                            template: "<span style='color:#cc3300'>" + data.data.length + "</span>"
+//                        });
+
+                        for(i = 0; i < data.data.length; i++){
+//                            data.data[i].table_color = '#ffcc99';
+                            console.log("getLinebalanceView2", data);
+                            if(data.data[i].cycletime > $scope.cdt.takttime_plan){
+                                isUnderTakt = false;
+                                break;
+                            }else{
+                                isUnderTakt = true;
+
+                            }
+                        }
+
+// SET Table Color DEC082022
+                        if(isUnderTakt == true){
+                        for(i = 0; i < (data.data.length-1); i++){
+                                data.data[i].table_color = $scope.setTableColor(data.data[i].cycletime);
+                            }
+                        }
+
+
+
+
+////  Alert Check UnderTakt
+//                            $ionicPopup.alert({
+//                                title: 'data alert !',
+//                                template: "<span style='color:#cc3300'>" + isUnderTakt + "</span>"
+//                            });
+
+
+
+
                         if (upform_afsave) {
                             updateFormLbMain(data.data);
                         } else {
@@ -1798,6 +1856,15 @@
                 var bn_output = parseFloat((60 / max_cycletime).toFixed(3));
                 var bn_eff = parseFloat(((((bn_output * $scope.cdt.total_sam) / (man * 60)) * 100)).toFixed(3));
                 var bn_otp = parseFloat(((($scope.cdt.takttime_plan / max_cycletime) * 100).toFixed(3)));
+
+                // Remark NOV232022 when all cycle time under takttime
+                //Calculate eff chance P.Sirintorn NOV232022
+                var eff_chance = 0;
+                if(isUnderTakt == true){
+                    eff_chance = parseFloat(((($scope.cdt.takttime_plan-(total_cycletime/man))/(total_cycletime/man))*100).toFixed(3));
+                }
+
+
                 $scope.cdt.mode = 'update';
                 $scope.cdt.total_cycletime = parseFloat(total_cycletime);
                 $scope.cdt.cycletime_max = parseFloat(max_cycletime);
@@ -1808,6 +1875,7 @@
                 $scope.cdt.bn_otp = parseFloat(bn_otp);
                 $scope.cdt.bn_employee = emp_code;
                 $scope.cdt.bn_position = position_code;
+                $scope.cdt.eff_chance = eff_chance;
                 $scope.updateLbMainByCdt(data_obj);
             }
             $scope.updateLbMainByCdt = function (data_obj) {
@@ -1826,6 +1894,7 @@
                     , eff_plan: $scope.cdt.eff_plan
                     , bn_position: $scope.cdt.bn_position
                     , bn_employee: $scope.cdt.bn_employee
+                    , eff_chance: $scope.cdt.eff_chance
                 };
                 updateLbMainByCdt(request, function (data) {
                     console.log("updateLbMainByCdt", data);
@@ -1955,11 +2024,36 @@
                     }
 
                 });
+
+//                function tableColor() {
+////                 Remark NOV232022 when all cycle time under takttime
+//                    var col = "";
+//                    if ((data.cycletime - 0) > (takttime_plan * (100 / 100))) {
+//                        //                        alert('1');
+//                        data.status_id = '7';
+//                        col = "#ff0000";
+//                    } else if ((takttime_plan * (85 / 100)) <= data.cycletime && data.cycletime <= (takttime_plan * (100 / 100))) {
+//                        //                        alert('2');
+//                        data.status_id = '6';
+//                        col = "#00ff00";
+//                    } else if ((data.cycletime - 0) < (takttime_plan * (85 / 100)) && (data.cycletime - 0) > (takttime_plan * (50 / 100))) {
+//                        //                        alert('3');
+//                        data.status_id = '5';
+//                        col = "#ffff00";
+//                    }else{
+//                        data.status_id = '8';
+//                        col = "#ff8000";
+//                    }
+//                }
+
+
                 $scope.labels = label_ar;
                 $scope.data = [data_ar, ar_over_cycle];
                 $scope.series = ['Series A', 'Series B'];
                 //                console.log('color_ar', color_ar);
                 //                $scope.color = color_ar;
+
+
 
                 $scope.datasetOverride = [
                     {
@@ -2021,6 +2115,24 @@
                     $scope.$apply();
                 }
             }
+
+            $scope.setTableColor = function (datact) {
+                tt10 = $scope.cdt.takttime_plan * 0.1;
+                tt15 = $scope.cdt.takttime_plan * 0.15;
+                tt20 = $scope.cdt.takttime_plan * 0.2;
+
+                if(datact <= tt10){
+                    return '#00e9f5';
+                }else if(datact <= tt15) {
+                    return '#00ff00';
+                }else if(datact <= tt20){
+                    return '#ffff00'
+                }else{
+                    return '#FF0000'
+                }
+
+            }
+
             $scope.onClickIconStyle = function () {
                 $scope.cdt_dl_style.style_keyword = '';
                 $scope.dialog_style.show();
@@ -2234,9 +2346,10 @@
                         $scope.cdt.eff_plan = parseFloat((lb_main_data.eff_plan - 0).toFixed(0));
                         c = parseFloat((lb_main_data.eff_plan - 0).toFixed(0));
 
+                        //Remark NOV232022 By P.Sirintorn
+                        $scope.cdt.eff_chance = eff_chance;
 
-                        $scope.cdt.
-                        showLoading($ionicLoading);
+                        $scope.cdt.showLoading($ionicLoading);
                         $scope.getLinebalanceView($scope.cdt.id);
                         flag_timer = true;
                         timerDataGrid();

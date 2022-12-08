@@ -284,6 +284,34 @@
                 </div>
             </div>
 
+            <div class="row pdd_mrg0  responsive-sm">
+                <div class="col">
+                    <div ng-if="cdt.mode == 'update' || cdt.mode == 'view'">
+                        <label class="item item-input">
+                            <div class="input-label2">
+                                โอกาสสูงสุดในการเพิ่ม %EFF
+                            </div>
+                            <input type="text" ng-disabled="true" placeholder="  N/A" style="font-size:12px;"
+                                   ng-model="cdt.eff_chance">
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div ng-if="cdt.mode == 'update' || cdt.mode == 'view'">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div ng-if="cdt.mode == 'update' || cdt.mode == 'view'">
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div ng-if="cdt.mode == 'update' || cdt.mode == 'view'">
+
+                    </div>
+                </div>
+            </div>
 
             <div class="row  responsive-sm">
                 <div class="col">
@@ -433,42 +461,45 @@
                     <!--<tr ng-repeat="lbc_data in cdt.lbc_obj| orderBy:(orderProp == 'seq'?lbc_data['seq']:'cycletime'):orderFlagProp" ng-click="onClickRowLbc(lbc_data);">-->
                     <!--<tr ng-repeat="lbc_data in cdt.lbc_obj| orderBy:['gsd_detail_id', lbc_data['seq']]:[true,true]" ng-click="onClickRowLbc(lbc_data);">-->
 
-                    <tr ng-repeat="lbc_data in cdt.lbc_obj| filter:{description:cdt.position_code, employee:cdt.emp_code} track by $index">
+                    <tr ng-repeat="lbc_data in cdt.lbc_obj| filter:{description:cdt.position_code, employee:cdt.emp_code} track by $index" ng-style="">
                         <!--<td style="width: 10vw" ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">-->
                         <!--{{$index + 1}}-->
                         <!--{{lbc_data.gsd_detail_id}}-->
                         <!--</td>-->
                         <td style="width: 10vw" ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             {{lbc_data.code}}
                         </td>
                         <td style="width: 25vw" ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             {{lbc_data.description}}
                         </td>
                         <td style="width: 10vw" ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
+
+                            <!--ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">-->
+
                             {{lbc_data.seq}}
                         </td>
                         <td style="width: 10vw" ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             {{lbc_data.employee}}
                         </td>
                         <td style="width: 10vw" ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             {{lbc_data.cycletime| number:3}}
                         </td>
                         <td style="width: 10vw" ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             {{lbc_data.status}}
                         </td>
                         <td style="width: 15vw" ng-click="onClickRowLbc(lbc_data, $index);"
                             ng-click="onClickRowLbc(lbc_data, $index);"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             {{lbc_data.name}}
                         </td>
                         <td style="width: 10vw;text-align: center" ng-if="cdt.mode == 'update' || cdt.mode == 'insert'"
-                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': '#f8f7f7'}">
+                            ng-style="null != lbc_data.select_row && lbc_data.select_row ? {'background-color': '#ffff99'} : {'background-color': lbc_data.table_color}">
                             <button class="button button-small button-assertive" ng-if="lbc_data.is_auto == 'f'"
                                     ng-click="deleteRowLbDetails(lbc_data);" >
                                 &emsp;<i class="ion ion-android-remove"></i>&emsp;

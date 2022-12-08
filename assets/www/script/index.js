@@ -1,7 +1,7 @@
 var sendtype = "";
 var newsdata = "";
 
-var restws = "http://172.16.53.1:8080/API_SERVICE/";
+var restws = "http://172.16.53.1:8080/API_SERVICE-II/";
 //var restws = "http://192.168.2.10:8080/API_SERVICE/";
 //var restws = "http://192.168.2.10:8080/API_SERVICE/";
 

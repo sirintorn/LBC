@@ -689,3 +689,18 @@ function deleteLbMain4Median(request, fn, fnerror) {
         error: fnerror
     });
 }
+
+
+function getRevision(request, fn, fnerror) {
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: restws + "service/getRevision ",
+        data: request,
+        beforeSend: function () {
+
+        },
+        success: fn,
+        error: fnerror
+    });
+}

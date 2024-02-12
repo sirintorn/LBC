@@ -1844,11 +1844,15 @@
                 });
                 //JAN042020 check max_cycletime and takttime_plan which one is more use that one.
                 var balance = 0;
-                if(max_cycletime > $scope.cdt.takttime_plan){
-                    balance = parseFloat(((total_cycletime * 100) / (max_cycletime * man)).toFixed(3));
-                }else{
-                    balance = parseFloat(((total_cycletime * 100) / ($scope.cdt.takttime_plan * man)).toFixed(3));
-                }
+
+                //Remark uncheck max CT //FEB112024
+//                if(max_cycletime > $scope.cdt.takttime_plan){
+//                    balance = parseFloat(((total_cycletime * 100) / (max_cycletime * man)).toFixed(3));
+//                }else{
+//                    balance = parseFloat(((total_cycletime * 100) / ($scope.cdt.takttime_plan * man)).toFixed(3));
+//                }
+                balance = parseFloat(((total_cycletime * 100) / (max_cycletime * man)).toFixed(3));
+
                 //เอา position_code ที่ cycletime มากสุดมา
                 var position_code = data_obj[index_max_cycle].code;       //P.Sirintorn MAR112017
                 //เอา emp_code ที่ cycletime มากสุดมา
